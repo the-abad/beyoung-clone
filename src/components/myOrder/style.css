@@ -1,0 +1,306 @@
+.whole {
+    background-color:aliceblue;
+}
+
+.container1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.my-account {
+    padding: 30px 0;
+}
+
+.my-account.profile {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.my-account .my-account-profile {
+    padding: 20px 20px;
+    text-align: center;
+    width: 250px;
+    height: 210px;
+    background: #d5d5d5;
+}
+
+.my-account .my-account-profile p.short-name {
+    font-size: 50px;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #141414;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.my-account .my-account-profile p.username {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #070707;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+.my-account span.Beyoungster {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    color: gray;
+}
+
+.my-account .myaccount-navigation {
+    padding: 0px 10px;
+    border: 1px solid #d4d5d5;
+    color: grey;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+.myaccount-navigation ul li {
+    padding: 30px 0px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.myaccount-navigation .active {
+    color:black;
+}
+
+/* .my-profile.my-address-form.profile-from {
+    margin-left: 80px;
+    width: 55%;
+} */
+
+.my-account.coupon .cartdetails {
+    margin-left: 80px;
+    /* width: 50%; */
+    width: 78%;
+    background: #fff;
+    padding: 30px 20px 20px 20px;
+    display: block;
+}
+
+.my-coupon-main.desktop {
+    margin-left: 120px !important;
+}
+
+.my-account.coupon .my-coupon-main .my-coupon {
+    padding-top: 0px;
+}
+
+.my-coupon {
+    padding: 30px 10px 0px 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.container ul {
+    list-style: none;
+}
+
+
+
+@media (min-width:300px) and (max-width:900px) {
+    .my-coupon-main.desktop {
+        margin-left: 20px !important;
+    }
+    
+
+}
+
+.cartdetails {
+    display: flex;
+    flex-direction: column;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 10px 10px;
+    background: #fff !important;
+    border-radius: 5px;
+    background: #fff;
+    box-shadow: 0px 0px 5px 0px rgba(0, 0, 0, 0.12);
+    width: 65%;
+    min-width: 280px;
+}
+
+.cartdetail {
+    background: #ffffff;
+    display: flex;
+    margin: 10px 0 10px 10px;
+    border: 2px solid #ddd;
+    border-radius: 10px;
+    box-shadow: 0px 5px #e7e6e6;
+    
+}
+
+.cartdetail figure {
+    margin: 0;
+    /* display: table; */
+    width: 120px;
+    /* height: 120px; */
+}
+
+.cart-body a {
+    display: inline-block;
+    cursor: pointer;
+    text-decoration: none;
+}
+
+ .cartdetail a img {
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+
+
+
+
+
+
+.productdetail {
+    margin: 0 0 0 20px;
+    width: 72%;
+}
+
+/* article, aside, details, figcaption, figure, footer, header, hgroup, menu, nav, section {
+    display: block;
+} */
+
+span.cartpname {
+    color: #000;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    letter-spacing: 0.2px;
+    display: block;
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+
+.desktop-prefix-checkout {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding: 5px 0px 0px 0px !important;
+    color: rgba(0, 0, 0, 0.4) !important;
+    text-align: left;
+    font-weight: 400;
+    font-size: 13px !important;
+    margin: 0px;
+    display: block;
+    width: 100%;
+    padding-bottom: 0px !important;
+}
+
+.productdetail .price-detail {
+    padding: 10px 0px 5px 0px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+}
+
+.productdetail .price-detail strong {
+    color: #000;
+    font-family: Lato;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: 137.5%;
+    letter-spacing: 0.36px;
+    text-transform: capitalize;
+}
+
+.productdetail .des-product {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    border-top: 1px solid #e5e5e58c;
+}
+
+
+.productdetail .des-product .des-product-color, .productdetail .des-product .des-product-size {
+    width: 50%;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    padding: 5px 10px 5px 0;
+    border-bottom: 1px solid #e5e5e58c;
+}
+
+.productdetail .des-product .des-product-color, .productdetail .des-product .des-product-size, .productdetail .des-product .des-product-text, .productdetail .des-product .des-product-color span, .productdetail .des-product .des-product-size span {
+    font-size: 13px;
+    line-height: 16px;
+    color: #000;
+}
+
+
+
+.productdetail .des-product .des-product-color strong, .productdetail .des-product .des-product-size strong {
+    font-weight: 600;
+    color: #746e6e;
+}
+
+.productdetail .des-product .des-product-color, .productdetail .des-product .des-product-size, .productdetail .des-product .des-product-text, .productdetail .des-product .des-product-color span, .productdetail .des-product .des-product-size span {
+    font-size: 13px;
+    line-height: 16px;
+}
+
+.product-remove {
+    display: flex;
+    justify-content: space-between;
+    padding: 10px 0 0;
+    text-align: center;
+    margin: 0px;
+    border-top: 1px solid #ddd;
+}
+
+.product-remove .left {
+    width: 20%;
+    border-right: 1px solid #ddd;
+}
+
+.product-main-box .product-left-box .cartdetails .product-remove a {
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+}
+
+.product-remove .right {
+    width: 80%;
+}
+
+.product-main-box .product-left-box .cartdetails .product-remove a {
+    color: rgba(0, 0, 0, 0.6);
+    text-align: center;
+    font-family: Lato;
+    font-size: 14px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+    text-transform: capitalize;
+}

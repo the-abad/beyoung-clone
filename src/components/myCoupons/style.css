@@ -1,0 +1,287 @@
+.whole {
+    background-color:aliceblue;
+}
+
+.container1 {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.my-account {
+    padding: 30px 0;
+}
+
+.my-account.profile {
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.my-account .my-account-profile {
+    padding: 20px 20px;
+    text-align: center;
+    width: 250px;
+    height: 210px;
+    background: #d5d5d5;
+}
+
+.my-account .my-account-profile p.short-name {
+    font-size: 50px;
+    margin: auto;
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    background: #141414;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-transform: uppercase;
+}
+
+.my-account .my-account-profile p.username {
+    font-style: normal;
+    font-weight: 400;
+    font-size: 20px;
+    line-height: 24px;
+    color: #070707;
+    text-transform: uppercase;
+    margin-top: 10px;
+    margin-bottom: 5px;
+}
+
+
+.my-account span.Beyoungster {
+    font-style: normal;
+    font-weight: 300;
+    font-size: 14px;
+    line-height: 17px;
+    color: gray;
+}
+
+.my-account .myaccount-navigation {
+    padding: 0px 10px;
+    border: 1px solid #d4d5d5;
+    color: grey;
+    margin-bottom: 20px;
+}
+
+ul {
+    list-style: none;
+}
+
+.myaccount-navigation ul li {
+    padding: 30px 0px;
+    border-bottom: 1px solid #d5d5d5;
+}
+
+.myaccount-navigation .active {
+    color:black;
+}
+
+/* .my-profile.my-address-form.profile-from {
+    margin-left: 80px;
+    width: 55%;
+} */
+
+.my-account.coupon .my-coupon-main {
+    margin-left: 80px;
+    width: 50%;
+}
+
+.my-coupon-main.desktop {
+    margin-left: 120px !important;
+}
+
+.my-account.coupon .my-coupon-main .my-coupon {
+    padding-top: 0px;
+}
+
+.my-coupon {
+    padding: 30px 10px 0px 10px;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 15px;
+}
+
+.container ul {
+    list-style: none;
+}
+
+
+.my-coupon li {
+    position: relative;
+    margin-bottom: 25px;
+}
+
+.my-account.coupon .my-coupon .coupon-section {
+    justify-content: flex-start;
+    border: 1px solid #d5d5d5;
+}
+
+.my-coupon .coupon-section {
+    display: flex;
+    background: #F9F9F9;
+    border-radius: 10px;
+    box-shadow: 0px 5px #e7e6e6;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+}
+
+.my-account.coupon .my-coupon .offer-percent {
+    padding: 20px 20px;
+}
+
+.offer-percent {
+    border-right: 1px dashed #d5d5d5;
+}
+.offer-percent, .copy-coupon {
+    padding: 0px 10px;
+}
+
+.my-coupon-main.desktop p.precent {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 50px;
+    line-height: 77px;
+    color: #000000;
+}
+
+.offer-percent p.precent {
+    font-style: normal;
+    font-weight: 700;
+    font-size: 45px;
+    line-height: 58px;
+    color: #070707;
+}
+
+sup {
+    color: #e02b27;
+}
+
+.my-account.coupon .my-coupon .copy-coupon {
+    padding: 20px 20px;
+}
+
+.offer-percent, .copy-coupon {
+    padding: 0px 10px;
+}
+
+.my-coupon-main.desktop span.offer-special {
+    font-style: normal;
+    font-weight: 500;
+    font-size: 20px;
+    line-height: 24px;
+    color: #070707;
+}
+
+span.offer-special {
+    display: block;
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #070707;
+    margin-bottom: 6px;
+}
+
+.copy-coupon span.min-cart {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 11px;
+    line-height: 12px;
+    color: #1B1A1A;
+}
+
+.my-account.coupon .my-coupon .copy-coupon-txt {
+    width: 100%;
+}
+
+.my-coupon-main.desktop .copy-coupon-txt {
+    background: #D9D9D900;
+}
+
+.copy-coupon-txt {
+    margin-top: 10px;
+    background: #D9D9D9;
+    border: 1px dashed #746F6F;
+    padding: 5px 4px;
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
+}
+
+.my-coupon-main.desktop .copy-coupon-txt input {
+    border: none;
+    background: #F9F9F9;
+    color: #000000;
+}
+
+.copy-coupon-txt button {
+    text-transform: capitalize;
+    background: #FEEB00;
+    padding: 5px 12px;
+    font-size: 12px;
+}
+
+/* button {
+    line-height: normal!important;
+} */
+
+.my-account.coupon .my-coupon .circule {
+    border-left: 1px solid #d5d5d5;
+}
+
+.my-coupon-main.desktop .circule {
+    top: 51px;
+}
+
+.circule {
+    background: #fff;
+    display: inline-block;
+    height: 55px;
+    width: 35px;
+    border-bottom-left-radius: 90px;
+    border-top-left-radius: 90px;
+    position: absolute;
+    right: 0px;
+    top: 28px;
+    box-shadow: -3px -2px #e7e6e6;
+}
+
+.coupon-button {
+    background: #fff;
+    padding: 10px 0px;
+    text-align: center;
+    margin: 10px 0px;
+}
+
+.my-account.coupon .coupon-button a {
+    padding: 1%;
+    text-transform: uppercase;
+}
+
+.coupon-button a {
+    background: #FEEB00;
+    font-style: normal;
+    font-weight: 400;
+    font-size: 18px;
+    line-height: 24px;
+    color: #070707;
+    text-transform: capitalize;
+    width: 100%;
+    padding: 4% 23%;
+    border-radius: 7px;
+}
+
+@media (min-width:300px) and (max-width:900px) {
+    .my-coupon-main.desktop {
+        margin-left: 20px !important;
+    }
+    
+
+}
