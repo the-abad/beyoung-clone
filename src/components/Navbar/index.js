@@ -8,6 +8,7 @@ import SignUp from '../Authentication/SignUp';
 export default function Navbar() {
 
 	const [profile, setProfile] = useState(null);
+	const [token1, setToken1] = useState(null);
 	const [showModal, setShowModal] = useState(false);
 	const change = () =>{
 		if(showModal){
@@ -42,9 +43,10 @@ export default function Navbar() {
         // Perform localStorage action
         const serializedObject = localStorage.getItem('profile');
 		const parsedProfile = JSON.parse(serializedObject);
-
+		setToken1(localStorage.getItem('token'));
 		if (parsedProfile) {
 		  setProfile(parsedProfile);
+		  
 		}
       }, [])
 
@@ -117,7 +119,7 @@ export default function Navbar() {
 							</svg>Track Order
 						</a>
 					</div>
-					{localStorage.getItem('token') ? (
+					{token1 ? (
 								<div className="right">
 										<div className="my-account-dropdown">
 												<a id="myAccountBtn" className="active btn dropbtn" href="#">
