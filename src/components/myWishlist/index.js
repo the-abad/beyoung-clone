@@ -6,9 +6,14 @@ import axios from 'axios';
 
 
 export default function MyWishlist() {
-    if (typeof window !== 'undefined') {
-    const serializedObject = localStorage.getItem('profile');
-    const profile = JSON.parse(serializedObject);}
+
+    useEffect(() => {
+        // Perform localStorage action
+        const serializedObject = localStorage.getItem('profile');
+      }, [])
+    
+    
+    const profile = JSON.parse(serializedObject);
 	
 
     const [singleWishlist, setSingleWishlist] = useState();

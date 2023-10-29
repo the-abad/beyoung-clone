@@ -37,9 +37,16 @@ export default function Navbar() {
 	const navigateToSearchResult = () => {
 		window.location.href = '/SearchResult/'; 
 	  };
-	  if (typeof window !== 'undefined') {
-	const serializedObject = localStorage.getItem('profile');}
+
+	  useEffect(() => {
+        // Perform localStorage action
+        const serializedObject = localStorage.getItem('profile');
+      }, [])
+	  
+	
+	
 	const profile = JSON.parse(serializedObject);
+
 	
 
 	const [isSticky, setIsSticky] = useState(false);
