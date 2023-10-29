@@ -42,10 +42,12 @@ console.log(props)
         
             if (response.data.status === 'success') {
               const token = response.data.token;
-              localStorage.setItem('token', token);
+              if (typeof window !== 'undefined') {
+              localStorage.setItem('token', token);}
               console.log(token);
               const profile = response?.data?.data;
-              localStorage.setItem('profile', JSON.stringify(profile));
+              if (typeof window !== 'undefined') {
+              localStorage.setItem('profile', JSON.stringify(profile));}
               props.setShowModal2(false);
             //   setIsSigned(true);
             }

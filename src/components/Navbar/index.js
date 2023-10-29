@@ -37,8 +37,8 @@ export default function Navbar() {
 	const navigateToSearchResult = () => {
 		window.location.href = '/SearchResult/'; 
 	  };
-
-	const serializedObject = localStorage.getItem('profile');
+	  if (typeof window !== 'undefined') {
+	const serializedObject = localStorage.getItem('profile');}
 	const profile = JSON.parse(serializedObject);
 	
 
@@ -61,7 +61,8 @@ export default function Navbar() {
 	}, []);
 
 	const handleLogout = () =>{
-		localStorage.removeItem('token');
+		if (typeof window !== 'undefined') {
+		localStorage.removeItem('token');}
 		window.location.reload();
 	}
 

@@ -43,9 +43,11 @@ export default function LogIn(props) {
             console.log(response);
             if (response?.data?.status === 'success') {
               const token = response?.data?.token;
-              localStorage.setItem('token', token);
+              if (typeof window !== 'undefined') {
+              localStorage.setItem('token', token);}
               const profile = response?.data?.data;
-              localStorage.setItem('profile', JSON.stringify(profile));
+              if (typeof window !== 'undefined') {
+              localStorage.setItem('profile', JSON.stringify(profile));}
               console.log(profile);
               props.setShowModal(false);
             //   setIsSigned(true);

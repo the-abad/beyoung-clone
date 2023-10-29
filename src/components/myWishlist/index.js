@@ -6,15 +6,16 @@ import axios from 'axios';
 
 
 export default function MyWishlist() {
-
-    const serializedObject = localStorage.getItem('profile');
+    if (typeof window !== 'undefined') {
+    const serializedObject = localStorage.getItem('profile');}
 	const profile = JSON.parse(serializedObject);
 
     const [singleWishlist, setSingleWishlist] = useState();
 
     const fetchWishlistData = () => {
     const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist';
-    const token = localStorage.getItem('token');
+    if (typeof window !== 'undefined') {
+    const token = localStorage.getItem('token');}
     const headers = {
       'Content-Type': 'application/json',
       'projectID': 's412etnzxy4q',
@@ -38,7 +39,8 @@ export default function MyWishlist() {
 
     const removeWhishlist = async (productId) => {
         const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist/'+productId;
-        const token = localStorage.getItem('token');
+        if (typeof window !== 'undefined') {
+        const token = localStorage.getItem('token');}
 
         const headers = {
             'Content-Type': 'application/json',
