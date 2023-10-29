@@ -40,7 +40,7 @@ export default function Footer() {
 						<a href=""> Contact Us</a>
 						<a href=""> Track Order</a>
 						<a href="">Returns &amp; Refunds</a>
-						<a href=""> FAQ's</a>
+						<a href=""> FAQ</a>
 						<a href="">Career </a>
 					</div>
 		      	</div>
