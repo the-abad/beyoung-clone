@@ -7,7 +7,7 @@ import SignUp from '../Authentication/SignUp';
 
 export default function Navbar() {
 
-
+	const [profile, setProfile] = useState(null);
 	const [showModal, setShowModal] = useState(false);
 	const change = () =>{
 		if(showModal){
@@ -41,13 +41,12 @@ export default function Navbar() {
 	  useEffect(() => {
         // Perform localStorage action
         const serializedObject = localStorage.getItem('profile');
-      }, [])
-	  
-	
-	
-	const profile = JSON.parse(serializedObject);
+		const parsedProfile = JSON.parse(serializedObject);
 
-	
+		if (parsedProfile) {
+		  setProfile(parsedProfile);
+		}
+      }, [])
 
 	const [isSticky, setIsSticky] = useState(false);
 
