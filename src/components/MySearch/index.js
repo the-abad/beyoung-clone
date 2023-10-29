@@ -40,7 +40,7 @@ export default function MySearch() {
                     <div class="checkoutsteps">
 
                         <section class="ProductList_searchInfo__gaYKm">
-                            <p>Results for "apple"</p>
+                            <p>Results for apple</p>
                             <p>51 Products found</p>
                         </section>
                         
