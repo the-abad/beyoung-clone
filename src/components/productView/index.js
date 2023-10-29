@@ -32,8 +32,7 @@ export default function ProductView() {
 
     const addWhishlist = async (productId) => {
         const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist';
-        if (typeof window !== 'undefined') {
-        const token = localStorage.getItem('token');}
+        const token = localStorage.getItem('token');
     
         const headers = {
             'Content-Type': 'application/json',

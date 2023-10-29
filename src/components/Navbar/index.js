@@ -5,10 +5,12 @@ import Image from 'next/image'
 import LogIn from '../Authentication/LogIn';
 import SignUp from '../Authentication/SignUp';
 
+
 export default function Navbar() {
 
 	const [profile, setProfile] = useState(null);
-	const [token1, setToken1] = useState(null);
+	const [tok, setTok] = useState(null);
+
 	const [showModal, setShowModal] = useState(false);
 	const change = () =>{
 		if(showModal){
@@ -40,15 +42,16 @@ export default function Navbar() {
 	  };
 
 	  useEffect(() => {
-        // Perform localStorage action
-        const serializedObject = localStorage.getItem('profile');
-		const parsedProfile = JSON.parse(serializedObject);
-		setToken1(localStorage.getItem('token'));
-		if (parsedProfile) {
+		const serializedObject = localStorage.getItem('profile');
+		console.log("Debug 1::::::"+serializedObject);
+		setTok(localStorage.getItem('token'))
+		console.log("Debug 2::::::::"+localStorage.getItem('token'));
+		if (serializedObject) {
+		  const parsedProfile = JSON.parse(serializedObject);
 		  setProfile(parsedProfile);
-		  
 		}
-      }, [])
+	  }, []);
+	
 
 	const [isSticky, setIsSticky] = useState(false);
 
@@ -69,12 +72,11 @@ export default function Navbar() {
 	}, []);
 
 	const handleLogout = () =>{
-		if (typeof window !== 'undefined') {
-		localStorage.removeItem('token');}
+		localStorage.removeItem('token');
 		window.location.reload();
 	}
 
-	// const [isSticky, setIsSticky] = useState(false);
+
 
 	// useEffect(() => {
 	// const handleScroll = () => {
@@ -119,7 +121,7 @@ export default function Navbar() {
 							</svg>Track Order
 						</a>
 					</div>
-					{token1 ? (
+					{tok ? (
 								<div className="right">
 										<div className="my-account-dropdown">
 												<a id="myAccountBtn" className="active btn dropbtn" href="#">
@@ -166,44 +168,7 @@ export default function Navbar() {
 												setShowModal2={setShowModal2}
 										/>
 								</div>
-				)}
-
-					{/* <div class="right">
-						<a  onClick={change} id="loginBtn" class="active btn login" >LOG IN</a>
-						<a  onClick={change2} id="registerBtn" class="btn signup">SIGNUP</a>
-						<LogIn 
-							showModal={showModal}
-							setShowModal={setShowModal}
-							showModal2={showModal2}
-							setShowModal2={setShowModal2}
-						/>
-						<SignUp 
-							showModal={showModal}
-							setShowModal={setShowModal}
-							showModal2={showModal2}
-							setShowModal2={setShowModal2}
-						/>
-					</div> */}
-
-					{/* <div class="right">
-						
-						<div class="my-account-dropdown">
-							<a   id="myAccountBtn" class="active btn dropbtn" href="/MyAccount/Profile">My Account</a>
-							<div class="dropdown-content">
-								<div class="profile-name">
-									<p class="header-user-name">Hello Zeeshan Abad</p>
-									<span class="header-user-number">+91 9121804096</span>
-								</div>
-
-								<a href="/MyAccount/Profile"><span>Profile</span> <img src="/assets/image/chevron-right.png" /></a>
-								<a href="/MyAccount/Order"><span>Order</span><img src="/assets/image/chevron-right.png" /></a>
-								
-								<a href="/MyAccount/Wishlist"><span>Wishlist</span> <img src="/assets/image/chevron-right.png" /></a>
-							</div>
-						</div>
-
-						<a id="logoutBtn" class="btn logout">LOGOUT </a>
-					</div> */}
+				)}					
 				</div>
 			</section>
 
@@ -261,15 +226,6 @@ export default function Navbar() {
 							      <a href="/#BEST SELLER" class="menu-title">BEST SELLER</a>
 
 								</li>
-{/* 
-								<li class="menu-top">
-							      <a href="shop-the-look.html" class="menu-title">Shop The Look</a>
-							    </li>
-
-								<li class="menu-top">
-							        <a class="menu-title" href="">Shop By Collection</a>
-
-								</li> */}
 
 
 							</ul>
