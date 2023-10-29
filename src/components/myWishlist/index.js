@@ -90,7 +90,7 @@ export default function MyWishlist() {
 
                         <div className="wishlist-product">
                         {singleWishlist?.items?.map((item) => (
-                            <div className="products-box">
+                            <div className="products-box" key={item.products._id}>
                                 <a href={`/products/${item.products._id}`}>
                                     <img src={item.products.displayImage} style={{"width":'100%'}}/>
                                     <h2 className="product-cat-name-mobile">
