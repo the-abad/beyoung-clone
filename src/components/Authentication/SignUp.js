@@ -24,14 +24,46 @@ console.log(props)
         const value = e.target.value
         setForm({...form, [name]:value});
     }
+    // const submitForm = async (e) => {
+    //     e.preventDefault();
+    
+    //     console.log(form);
+
+    //     const apiUrl = 'https://academics.newtonschool.co/api/v1/user/signup';
+    
+    //     const body = {...form, appType: 'ecommerce'}
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'projectID': 's412etnzxy4q',
+    //     };
+    
+    //     try {
+    //         const response = await axios.post(apiUrl, body, { headers: headers });
+        
+    //         if (response.data.status === 'success') {
+    //           const token = response.data.token;
+    //           localStorage.setItem('token', token);
+    //           console.log(token);
+    //           const profile = response?.data?.data;
+    //           localStorage.setItem('profile', JSON.stringify(profile));
+    //           props.setShowModal2(false);
+    //         //   setIsSigned(true);
+    //         }
+    //       } catch (error) {
+    //         console.error("Error fetching data: ", error);
+    //       }
+    // }
+
+
+
     const submitForm = async (e) => {
         e.preventDefault();
     
         console.log(form);
-
+    
         const apiUrl = 'https://academics.newtonschool.co/api/v1/user/signup';
     
-        const body = {...form, appType: 'ecommerce'}
+        const body = { ...form, appType: 'ecommerce' };
         const headers = {
             'Content-Type': 'application/json',
             'projectID': 's412etnzxy4q',
@@ -39,20 +71,23 @@ console.log(props)
     
         try {
             const response = await axios.post(apiUrl, body, { headers: headers });
-        
+    
             if (response.data.status === 'success') {
-              const token = response.data.token;
-              localStorage.setItem('token', token);
-              console.log(token);
-              const profile = response?.data?.data;
-              localStorage.setItem('profile', JSON.stringify(profile));
-              props.setShowModal2(false);
-            //   setIsSigned(true);
+                const token = response.data.token;
+                localStorage.setItem('token', token);
+                console.log(token);
+                const profile = response?.data?.data;
+                localStorage.setItem('profile', JSON.stringify(profile));
+                props.setShowModal2(false);
+    
+                // Refresh the page
+                window.location.reload();
             }
-          } catch (error) {
+        } catch (error) {
             console.error("Error fetching data: ", error);
-          }
+        }
     }
+    
     // console.log(isSigned);
     // if (isSigned) {
         
