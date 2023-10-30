@@ -10,6 +10,7 @@ import BestSellerFilterProducts from "../others/bestSellerFilterProducts";
 
 
 export default function Homepage(){
+  
  return(
     <>
     <HeaderSlider/>
