@@ -10,6 +10,17 @@ export default function Navbar() {
 
 	const [profile, setProfile] = useState(null);
 	const [tok, setTok] = useState(null);
+	//const [showLoginPopup, setShowLoginPopup] = useState(false);
+
+	const handleWishlistClick = () => {
+		if (tok) {
+			// If the user is logged in, navigate to the wishlist page
+			window.location.href = '/MyAccount/Wishlist';
+		  } else {
+			// If the user is not logged in, show the login popup
+			setShowModal(true);
+		  }
+	};
 
 	const [showModal, setShowModal] = useState(false);
 	const change = () =>{
@@ -73,7 +84,7 @@ export default function Navbar() {
 
 	const handleLogout = () =>{
 		localStorage.removeItem('token');
-		window.location.reload();
+		window.location.href = '/';
 	}
 
 
@@ -248,7 +259,7 @@ export default function Navbar() {
 							<button onClick={navigateToSearchResult} style={{cursor:'pointer'}}>Search</button>
 						</div>
 
-						<a href="/MyAccount/Wishlist/" aria-label="wishlist" class="heart-icon">
+						<a onClick={handleWishlistClick}  aria-label="wishlist" class="heart-icon">
 							<svg version="1.1" xmlns="http://www.w3.org/2000/svg" width="17" height="17" viewBox="0 0 437.775 437.774">
 								<g><path d="M316.722,29.761c66.852,0,121.053,54.202,121.053,121.041c0,110.478-218.893,257.212-218.893,257.212S0,266.569,0,150.801 C0,67.584,54.202,29.761,121.041,29.761c40.262,0,75.827,19.745,97.841,49.976C240.899,49.506,276.47,29.761,316.722,29.761z">				
 								</path></g>
@@ -256,6 +267,10 @@ export default function Navbar() {
 								<g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g><g></g>
 							</svg>
 						</a>
+						
+
+						
+						
 
 						
 
