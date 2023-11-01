@@ -11,7 +11,16 @@ export default function ProductView() {
     // console.log(id,'idddddd');
 
     const [singleProduct, setSingleProduct] = useState();
+
+    const [heartColor, setHeartColor] = useState('white');
+
+
     useEffect(() => {
+
+        const storedHeartColor = localStorage.getItem('heartColor');
+        if (storedHeartColor) {
+            setHeartColor(storedHeartColor);
+        }
     
      const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/product/'+id;
      
@@ -30,6 +39,32 @@ export default function ProductView() {
        });
     }, []);
 
+    // const addWhishlist = async (productId) => {
+    //     const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist';
+    //     const token = localStorage.getItem('token');
+    
+    //     const headers = {
+    //         'Content-Type': 'application/json',
+    //         'Authorization': `Bearer ${token}`,
+    //         'projectID': 's412etnzxy4q', 
+    //     };
+    
+    //     const body = {
+    //         "productId": productId
+    //     };
+    
+    //     try {
+    //         const response = await axios.patch(apiUrl, body, { headers: headers });
+    //         console.log(response);
+    //         setHeartColor('red');
+    //         localStorage.setItem('heartColor', 'red');
+
+    //     } catch (error) {
+    //         console.error("Error fetching data: ", error);
+    //     }
+
+    // }
+
     const addWhishlist = async (productId) => {
         const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist';
         const token = localStorage.getItem('token');
@@ -44,13 +79,35 @@ export default function ProductView() {
             "productId": productId
         };
     
-        try {
-            const response = await axios.patch(apiUrl, body, { headers: headers });
-            console.log(response);
-        } catch (error) {
-            console.error("Error fetching data: ", error);
+        if (heartColor === 'red') {
+            // If the heart color is red, remove it from the wishlist
+            try {
+                const response = await axios.delete(apiUrl, {
+                    headers: headers,
+                    data: body,
+                });
+                console.log(response);
+                // Set the heart color to black and store it in localStorage
+                setHeartColor('white');
+                localStorage.setItem('heartColor', 'white');
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        } else {
+            // If the heart color is black, add it to the wishlist
+            
+            try {
+                const response = await axios.patch(apiUrl, body, { headers: headers });
+                console.log(response);
+                // Set the heart color to red and store it in localStorage
+                setHeartColor('red');
+                localStorage.setItem('heartColor', 'red');
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
         }
     }
+    
 
 
 
@@ -97,7 +154,7 @@ console.log(singleProduct);
                                         <svg
                                             style={{ margin: '9px 0px 0px 9px' }}
                                             viewBox="0 0 24 22"
-                                            fill="none"
+                                            fill={heartColor}
                                             xmlns="http://www.w3.org/2000/svg"
                                             className="add-to-wishlist"
                                             height="18"
