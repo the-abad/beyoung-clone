@@ -59,7 +59,7 @@ export default function MySearch() {
                         <div style={{width:'100%'}} >
                             {console.log(searchProduct)}
                         {searchProduct.map((item) => (
-                            <div class="product-main-box">            
+                            <div key={item._id} class="product-main-box">            
                                 <div class="product-left-box">
                                     <div class="cartdetails" id="cart_0">
                                         <div class="cartdetail">
