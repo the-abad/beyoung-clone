@@ -1,10 +1,85 @@
 'use client'
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import React, { useRef } from 'react';
 import './bodyStyle.css'
 import Image from 'next/image'
+import axios from 'axios';
+
 
 export default function CartBody() {
+
+    // const [profile, setProfile] = useState(null);
+
+    // useEffect(() => {
+    //     const serializedObject = localStorage.getItem('profile');
+    //     const parsedProfile = JSON.parse(serializedObject);
+
+    //     if (parsedProfile) {
+    //         setProfile(parsedProfile);
+    //     }
+    // }, []);
+
+
+    const [singleCart, setSingleCart] = useState(null);
+
+    const fetchCartData = () => {
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart';
+
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            const headers = {
+                'Content-Type': 'application/json',
+                'projectID': 's412etnzxy4q',
+                'Authorization': `Bearer ${token}`,
+            };
+
+            axios.get(apiUrl, { headers: headers })
+                .then((response) => {
+                    setSingleCart(response?.data?.data);
+                })
+                .catch((error) => {
+                    console.error("Error fetching data: ", error);
+                });
+        }
+    };
+
+    useEffect(() => {
+        fetchCartData();
+    }, []);
+
+    const removeCart = async (productId) => {
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart/' + productId;
+
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                "projectID": 's412etnzxy4q', // Replace with your actual Project ID
+            };
+
+            try {
+                const response = await axios.delete(apiUrl, { headers: headers });
+                console.log(response);
+                fetchWishlistData();
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        }
+
+        window.location.reload();
+    };
+
+    const calculateTotalPrice = () => {
+        if (singleCart && singleCart.items) {
+            return singleCart.items.reduce((total, item) => {
+                return total + item.product.price;
+            }, 0);
+        }
+        return 0;
+    };
+
+    
 
     
 
@@ -17,190 +92,92 @@ export default function CartBody() {
                         <div className='cartbanner'>
                         <img src='/assets/image/cartbanner.png' />
                         <hr></hr>
-                            {/* <ul class="shopping-step">  
-                                <li class="shopping-cart-icon active">
-                                    <span class="checkouttopicon">
-                                        <i> </i>
-                                    </span>
-                                    <span class="checkouttxt">My Cart</span>
-                                </li>
-                                
-                                <li class="address active">
-                                    <span class="checkouttopicon">
-                                        <i> </i>
-                                    </span>
-                                    <span class="checkouttxt">Address</span>
-                                </li>
-                                
-                                <li class="credit-card active">
-                                    <span class="checkouttopicon">
-                                        <i> </i>
-                                    </span>
-                                    <span class="checkouttxt">Payment</span>
-                                </li>
-                            </ul> */}
+                          
                         </div>
+                            {singleCart && (
+                                <div class="product-main-box">
+                                    <div className='special'>
+                                    {singleCart.items.map((item, index) => (
+                                        <div class="product-left-box" key={item._id}>
+                                            
+                                            <div class="cartdetails" id="cart_0">
+                                                <div class="cartdetail">
+                                                    <figure>
+                                                        <a href={`/products/${item.product._id}`}><img src={item.product.displayImage} alt="product img" /></a>
+                                                        
+                                                    </figure>
+                                                    
+                                                    <article class="productdetail">
+                                                        <span class="cartpname" style={{marginBottom:'0px'}}>{item.product.name}</span>
+                                                        {/* <span class="desktop-prefix-checkout">{item.product.brand}</span> */}
+                                                        
+                                                        <div class="price-detail">
+                                                            <strong>₹{item.product.price}</strong>
+                                                        </div>
+                                                        
+                                                    
 
-                        <div class="product-main-box">
-                            <div class="product-left-box">
-                                <div class="cartdetails" id="cart_0">
-                                    <div class="cartdetail">
-                                        <figure>
-                                            <a href="/indian-cricket-half-sleeve-t-shirt-for-men"><img src="/assets/image/wishpro1.jpg" alt="product img" /></a>
-                                            <div class="qty">
-                                                <select>
-                                                    <option value="1"> Qty : 1</option>
-                                                    <option value="2"> Qty : 2</option>
-                                                    <option value="3"> Qty : 3</option>
-                                                    <option value="4"> Qty : 4</option>
-                                                    <option value="5"> Qty : 5</option>
-                                                    <option value="6"> Qty : 6</option>
-                                                    <option value="7"> Qty : 7</option>
-                                                    <option value="8"> Qty : 8</option>
-                                                    <option value="9"> Qty : 9</option>
-                                                    <option value="10"> Qty : 10</option>
-                                                </select>
-                                            </div>
-                                        </figure>
-                                        
-                                        <article class="productdetail">
-                                            <span class="cartpname" style={{marginBottom:'0px'}}>Indian Cricket Half Sleeve T-shirt for Men</span>
-                                            <span class="desktop-prefix-checkout">Printed T-Shirts</span>
-                                            
-                                            <div class="price-detail">
-                                                <strong>₹349</strong>
-                                            </div>
-                                            
-                                            {/* <div class="yousaved" style={{marginBottom:'5px'}}>
-                                                <p>You Save<span class="offerprice" style={{color:'rgb(75, 181, 80)', paddingLeft:'5px'}}  >₹200.00</span></p>
-                                            </div> */}
-
-                                            <br></br>
-                                            
-                                            <div class=" des-product">
-                                                <div class="des-product-color">
-                                                    <strong>Color :</strong>
-                                                    <span> Navy Blue</span>
+                                                      
+                                                        
+                                                        
+                                                    </article>
                                                 </div>
                                                 
-                                                <div class="des-product-size">
-                                                    <strong>Size :</strong>
-                                                    <span> M</span>
+                                                <div class="product-remove">
+                                                    <div class="left">
+                                                        <a onClick={() => removeCart(item.product._id)} class="remove-btn">Remove</a>
+                                                    </div>
+                                                    
+                                                  
                                                 </div>
                                             </div>
-                                        </article>
+
+                                            
+                                        </div>
+
+                                    ))};
                                     </div>
+
+                                                            {/*right part*/}
                                     
-                                    <div class="product-remove">
-                                        <div class="left">
-                                            <a href="" class="remove-btn">Remove</a>
-                                        </div>
-                                        
-                                        <div class="right">
-                                            <a href="" class="">Move to Wishlist</a>
-                                        </div>
-                                    </div>
-                                </div>
+                                    <div className="product-right-box">
+                                        <div className="price-items">
+                                            <div className="heading">PRICE DETAILS</div>
 
-                                <div class="cartdetails" id="cart_0">
-                                    <div class="cartdetail">
-                                        <figure>
-                                            <a href="/indian-cricket-half-sleeve-t-shirt-for-men"><img src="/assets/image/wishpro1.jpg" alt="product img" /></a>
-                                            <div class="qty">
-                                                <select>
-                                                    <option value="1"> Qty : 1</option>
-                                                    <option value="2"> Qty : 2</option>
-                                                    <option value="3"> Qty : 3</option>
-                                                    <option value="4"> Qty : 4</option>
-                                                    <option value="5"> Qty : 5</option>
-                                                    <option value="6"> Qty : 6</option>
-                                                    <option value="7"> Qty : 7</option>
-                                                    <option value="8"> Qty : 8</option>
-                                                    <option value="9"> Qty : 9</option>
-                                                    <option value="10"> Qty : 10</option>
-                                                </select>
+                                            <div className="mrp-text" style={{ marginBottom: '20px' }}>
+                                            <span>Total MRP (Inc. of Taxes)</span>
+                                            <span>₹{calculateTotalPrice()}</span>
                                             </div>
-                                        </figure>
-                                        
-                                        <article class="productdetail">
-                                            <span class="cartpname" style={{marginBottom:'0px'}}>Indian Cricket Half Sleeve T-shirt for Men</span>
-                                            <span class="desktop-prefix-checkout">Printed T-Shirts</span>
-                                            
-                                            <div class="price-detail">
-                                                <strong>₹349</strong>
-                                            </div>
-                                            
-                                            {/* <div class="yousaved" style={{marginBottom:'5px'}}>
-                                                <p>You Save<span class="offerprice" style={{color:'rgb(75, 181, 80)', paddingLeft:'5px'}}  >₹200.00</span></p>
-                                            </div> */}
 
+                                            <div className="mrp-text" style={{ marginBottom: '20px' }}>
+                                            <span>Shipping</span>
+                                            <span style={{ color: 'rgb(9, 181, 9)' }}>
+                                                <span style={{ textDecoration: 'line-through', color: 'rgb(0, 0, 0' }}>
+                                                ₹49
+                                                </span> Free
+                                            </span>
+                                            </div>
+
+                                            <div className="mrp-text" style={{ marginBottom: '10px' }}>
+                                            <span>Cart Total</span>
+                                            <span>₹{calculateTotalPrice()}</span>
+                                            </div>
+                                        </div>
+
+                                        <div className="total-amount">
+                                            <div className="inner">
+                                            <strong>Total Amount</strong>
+                                            <span>₹{calculateTotalPrice()}</span>
+                                            </div>
                                             <br></br>
-                                            
-                                            <div class=" des-product">
-                                                <div class="des-product-color">
-                                                    <strong>Color :</strong>
-                                                    <span> Navy Blue</span>
-                                                </div>
-                                                
-                                                <div class="des-product-size">
-                                                    <strong>Size :</strong>
-                                                    <span> M</span>
-                                                </div>
-                                            </div>
-                                        </article>
-                                    </div>
-                                    
-                                    <div class="product-remove">
-                                        <div class="left">
-                                            <a href="" class="remove-btn">Remove</a>
+
+                                            <a href='/Cart/Checkout/' className="checkout-btn">checkout securely</a>
                                         </div>
-                                        
-                                        <div class="right">
-                                            <a href="" class="">Move to Wishlist</a>
-                                        </div>
-                                    </div>
+                                    </div>   
+
+
                                 </div>
-                            </div>
-
-                                                    {/*right part*/}
-                            
-                            <div className="product-right-box">
-                                <div className="price-items">
-                                    <div className="heading">PRICE DETAILS (1 items)</div>
-
-                                    <div className="mrp-text" style={{ marginBottom: '20px' }}>
-                                    <span>Total MRP (Inc. of Taxes)</span>
-                                    <span>₹349</span>
-                                    </div>
-
-                                    <div className="mrp-text" style={{ marginBottom: '20px' }}>
-                                    <span>Shipping</span>
-                                    <span style={{ color: 'rgb(9, 181, 9)' }}>
-                                        <span style={{ textDecorationLine: 'lineThrough', color: 'rgb(0, 0, 0' }}>
-                                        ₹49
-                                        </span> Free
-                                    </span>
-                                    </div>
-
-                                    <div className="mrp-text" style={{ marginBottom: '10px' }}>
-                                    <span>Cart Total</span>
-                                    <span>₹349</span>
-                                    </div>
-                                </div>
-
-                                <div className="total-amount">
-                                    <div className="inner">
-                                    <strong>Total Amount</strong>
-                                    <span>₹349</span>
-                                    </div>
-                                    <p>You Saved ₹200 on this order</p>
-
-                                    <a href='/Cart/Checkout/' className="checkout-btn">checkout securely</a>
-                                </div>
-                            </div>   
-
-
-                        </div>
+                            )}
 
                                                     
                         

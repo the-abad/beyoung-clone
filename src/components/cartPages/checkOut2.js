@@ -7,7 +7,7 @@ import CartPop from './cartPop';
 import axios from 'axios';
 
 
-export default function MycheckOut() {
+export default function MycheckOuts() {
 
     const [showModal, setShowModal] = useState(false);
 	const change = () =>{
@@ -18,9 +18,9 @@ export default function MycheckOut() {
 		}
 	}
 
-    const [singleCart, setSingleCart] = useState(null);
+    const [lastCartItem, setLastCartItem] = useState(null);
 
-    const fetchCartData = () => {
+    const fetchLastCartItem = () => {
         const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart';
 
         if (typeof window !== 'undefined') {
@@ -31,9 +31,19 @@ export default function MycheckOut() {
                 'Authorization': `Bearer ${token}`,
             };
 
-            axios.get(apiUrl, { headers: headers })
+            axios
+                .get(apiUrl, { headers: headers })
                 .then((response) => {
-                    setSingleCart(response?.data?.data);
+                    const cartItems = response?.data?.data.items;
+
+                    if (cartItems.length > 0) {
+                        // Extract the last item from the cart items
+                        const lastItem = cartItems[cartItems.length - 1];
+                        setLastCartItem(lastItem);
+                    } else {
+                        // If the cart is empty, set last item to null
+                        setLastCartItem(null);
+                    }
                 })
                 .catch((error) => {
                     console.error("Error fetching data: ", error);
@@ -41,15 +51,23 @@ export default function MycheckOut() {
         }
     };
 
+
     useEffect(() => {
-        fetchCartData();
+        fetchLastCartItem();
     }, []);
 
+    // const calculateTotalPrice = () => {
+    //     if (lastCartItem && lastCartItem.items) {
+    //         return singleCart.items.reduce((total, item) => {
+    //             return total + item.product.price;
+    //         }, 0);
+    //     }
+    //     return 0;
+    // };
+
     const calculateTotalPrice = () => {
-        if (singleCart && singleCart.items) {
-            return singleCart.items.reduce((total, item) => {
-                return total + item.product.price;
-            }, 0);
+        if (lastCartItem) {
+            return lastCartItem.product.price;
         }
         return 0;
     };

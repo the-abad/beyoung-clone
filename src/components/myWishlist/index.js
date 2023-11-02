@@ -63,6 +63,31 @@ export default function MyWishlist() {
         }
     };
 
+    const addToCart = async (productId) => {
+
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart/'+productId;
+        const token = localStorage.getItem('token');
+
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'projectID': 's412etnzxy4q', 
+        };
+
+        const body = {
+            "quantity": "1",
+
+        };
+
+        try {
+            const response = await axios.patch(apiUrl, body, { headers: headers });
+            console.log(response);
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        }
+
+    }
+
     return (
         <>
             <div className='whole'>
@@ -101,7 +126,7 @@ export default function MyWishlist() {
                                         <div className="heart-icon" onClick={() => removeWishlist(item.products._id)}>
                                             <a> x</a>
                                         </div>
-                                        <a className="back-btn">
+                                        <a onClick={() => {addToCart(item.products._id); removeWishlist(item.products._id)}} className="back-btn">
                                             <img src="/assets/image/bag.png" alt="Add to Cart" />
                                             <span>Add to cart</span>
                                         </a>

@@ -3,6 +3,8 @@ import { useState, useEffect } from 'react'
 import React, { useRef } from 'react';
 import './style.css'
 import Image from 'next/image'
+import LogIn from '../Authentication/LogIn';
+import SignUp from '../Authentication/SignUp';
 import axios from 'axios';
 
 export default function ProductView() {
@@ -15,12 +17,28 @@ export default function ProductView() {
     const [heartColor, setHeartColor] = useState('white');
 
 
+    const [showModal, setShowModal] = useState(false);
+	const change = () =>{
+		if(showModal){
+			setShowModal(false);
+		}else{
+			setShowModal(true)
+		}
+	}
+	const [showModal2, setShowModal2] = useState(false);
+	const change2 = () =>{
+		if(showModal2){
+			setShowModal2(false);
+		}else{
+			setShowModal2(true)
+		}
+	}
+    
+
+
     useEffect(() => {
 
-        const storedHeartColor = localStorage.getItem('heartColor');
-        if (storedHeartColor) {
-            setHeartColor(storedHeartColor);
-        }
+        
     
      const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/product/'+id;
      
@@ -64,11 +82,18 @@ export default function ProductView() {
     //     }
 
     // }
+    
 
     const addWhishlist = async (productId) => {
-        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist';
         const token = localStorage.getItem('token');
-    
+        if (!token) {
+            // User is not logged in, show a pop-up message
+            setShowModal(true);
+            return;
+        }
+        
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/wishlist';
+        
         const headers = {
             'Content-Type': 'application/json',
             'Authorization': `Bearer ${token}`,
@@ -79,22 +104,6 @@ export default function ProductView() {
             "productId": productId
         };
     
-        if (heartColor === 'red') {
-            // If the heart color is red, remove it from the wishlist
-            try {
-                const response = await axios.delete(apiUrl, {
-                    headers: headers,
-                    data: body,
-                });
-                console.log(response);
-                // Set the heart color to black and store it in localStorage
-                setHeartColor('white');
-                localStorage.setItem('heartColor', 'white');
-            } catch (error) {
-                console.error("Error fetching data: ", error);
-            }
-        } else {
-            // If the heart color is black, add it to the wishlist
             
             try {
                 const response = await axios.patch(apiUrl, body, { headers: headers });
@@ -105,8 +114,78 @@ export default function ProductView() {
             } catch (error) {
                 console.error("Error fetching data: ", error);
             }
-        }
+        
     }
+
+    const addToCart = async (productId) => {
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            // User is not logged in, show a pop-up message
+            setShowModal(true);
+            return;
+        }
+        
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart/'+productId;
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'projectID': 's412etnzxy4q', 
+        };
+
+        const body = {
+            "quantity": "1",
+
+        };
+
+        try {
+            const response = await axios.patch(apiUrl, body, { headers: headers });
+            console.log(response);
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        }
+
+    }
+
+    const addToBuyNow = async (productId) => {
+
+        const token = localStorage.getItem('token');
+        if (!token) {
+            // User is not logged in, show a pop-up message
+            setShowModal(true);
+            return;
+        }
+        
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart/'+productId;
+       
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'projectID': 's412etnzxy4q', 
+        };
+
+        const body = {
+            "quantity": "1",
+
+        };
+
+        try {
+            const response = await axios.patch(apiUrl, body, { headers: headers });
+            console.log(response);
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        }
+
+        window.location.href = '/Cart/BuyCart';
+
+
+    }
+
+    
+    
+    
+
+    
     
 
 
@@ -115,6 +194,19 @@ export default function ProductView() {
 console.log(singleProduct);
     return (
         <>
+
+            <LogIn
+				showModal={showModal}
+				setShowModal={setShowModal}
+				showModal2={showModal2}
+				setShowModal2={setShowModal2}
+			/>
+			<SignUp
+				showModal={showModal}
+				setShowModal={setShowModal}
+				showModal2={showModal2}
+				setShowModal2={setShowModal2}
+			/>
             <div class="productViewBox">
                 <section class="container checkout-container-maincart">
                     <div class="checkoutsteps">
@@ -270,15 +362,17 @@ console.log(singleProduct);
 
                                     <div className="product-add-button">
                                         <div className="left">
-                                        <a>
+                                        <a onClick={() => addToCart(singleProduct?._id)}>
                                             <img src="https://www.beyoung.in/desktop/images/product-details-2/cart.svg" alt="Add to Cart" /> ADD TO CART
                                         </a>
                                         </div>
                                         <div className="right">
-                                        <a>
+                                        <a onClick={() => addToBuyNow(singleProduct?._id)}>
                                             <img src="https://www.beyoung.in/desktop/images/product-details-2/arrow-right.svg" alt="Buy Now" /> BUY NOW
                                         </a>
                                         </div>
+
+                                      
                                     </div>
                                     
                                 </div>
