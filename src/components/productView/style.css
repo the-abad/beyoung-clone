@@ -645,3 +645,31 @@ option {
     border: 1px solid #ddd;
     border-radius: 50px;
 }
+
+/* Add this CSS to your stylesheet or component styles */
+.success-message {
+    background-color: #4CAF50; /* Background color */
+    color: white; /* Text color */
+    padding: 10px 20px; /* Padding around the message */
+    position: fixed; /* Position it fixed on the screen */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the message properly */
+    border-radius: 4px; /* Rounded corners */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Drop shadow */
+    z-index: 1000; /* Ensure it's on top of other content */
+    transition: opacity 0.5s; /* Add a fade-in effect */
+  
+    /* You can customize the styles further as needed */
+  }
+  
+  /* Add this to apply the fade-in animation */
+  .success-message.fade-in {
+    opacity: 1;
+  }
+  
+  /* Add this to apply the fade-out animation */
+  .success-message.fade-out {
+    opacity: 0;
+  }
+  

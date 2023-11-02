@@ -16,6 +16,17 @@ export default function ProductView() {
 
     const [heartColor, setHeartColor] = useState('white');
 
+     // State variable for tracking success message
+    const [addToCartSuccess, setAddToCartSuccess] = useState(false);
+
+    // Function to show the success message
+    const showAddToCartSuccessMessage = () => {
+        setAddToCartSuccess(true);
+        setTimeout(() => {
+        setAddToCartSuccess(false);
+        }, 3000); // Hide the message after 3 seconds (adjust the time as needed)
+    };
+
 
     const [showModal, setShowModal] = useState(false);
 	const change = () =>{
@@ -141,6 +152,7 @@ export default function ProductView() {
         try {
             const response = await axios.patch(apiUrl, body, { headers: headers });
             console.log(response);
+            showAddToCartSuccessMessage();
         } catch (error) {
             console.error("Error fetching data: ", error);
         }
@@ -391,6 +403,12 @@ console.log(singleProduct);
 
                 </section>
             </div>
+
+            {addToCartSuccess && (
+        <div className="success-message">
+          Item added to the cart successfully!
+        </div>
+      )}
 
                        
         </>
