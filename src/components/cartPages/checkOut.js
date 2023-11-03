@@ -9,6 +9,23 @@ import axios from 'axios';
 
 export default function MycheckOut() {
 
+    const [cardNumber, setCardNumber] = useState('');
+    const [cardName, setCardName] = useState('');
+    const [expiryMM, setExpiryMM] = useState('');
+    const [expiryYY, setExpiryYY] = useState('');
+    const [cvv, setCVV] = useState('');
+    const [isFormValid, setIsFormValid] = useState(false);
+
+    const validateForm = () => {
+        if (cardNumber && cardName && expiryMM && expiryYY && cvv) {
+            setIsFormValid(true);
+        } else {
+            setIsFormValid(false);
+        }
+    };
+    
+
+
     const [showModal, setShowModal] = useState(false);
 	const change = () =>{
 		if(showModal){
@@ -40,7 +57,7 @@ export default function MycheckOut() {
                 });
         }
     };
-
+console.log();
     useEffect(() => {
         fetchCartData();
     }, []);
@@ -53,6 +70,68 @@ export default function MycheckOut() {
         }
         return 0;
     };
+
+    const removeCart = async (productId) => {
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart/' + productId;
+
+        if (typeof window !== 'undefined') {
+            const token = localStorage.getItem('token');
+            const headers = {
+                'Content-Type': 'application/json',
+                'Authorization': `Bearer ${token}`,
+                "projectID": 's412etnzxy4q', // Replace with your actual Project ID
+            };
+
+            try {
+                const response = await axios.delete(apiUrl, { headers: headers });
+                console.log(response);
+                fetchWishlistData();
+            } catch (error) {
+                console.error("Error fetching data: ", error);
+            }
+        }
+
+    };
+
+    const addToOrder = async (productId, quantities) => {
+
+        const token = localStorage.getItem('token');
+        
+        
+        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/order';
+        const headers = {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+            'projectID': 's412etnzxy4q', 
+        };
+        
+        const body = {
+            "quantity": 1,
+            "productId": productId,
+            "addressType": "HOME",
+            "address": {
+            "street": "123 Main St",
+            "city": "Anytown",
+            "state": "CA",
+            "country": "USA",
+            "zipCode": "12345"}
+
+
+        };
+
+        try {
+            const response = await axios.post(apiUrl, body, { headers: headers });
+            console.log(response);
+            if(response.status==200) {
+                removeCart(productId);
+                change();
+            }
+            
+        } catch (error) {
+            console.error("Error fetching data: ", error);
+        }
+
+    }
 
     
 
@@ -80,12 +159,23 @@ export default function MycheckOut() {
                                         <div className="payment-form-group">
                                         <form id="card_payment" style={{ position: 'relative' }}>
                                             <div className="form-in in">
-                                            <input id="card_number" type="text" placeholder="Card Number " maxLength="19" />
+                                            <input id="card_number" type="text" placeholder="Card Number " maxLength="19" 
+                                            value={cardNumber}
+                                            onChange={(e) => {
+                                                setCardNumber(e.target.value);
+                                                validateForm();
+                                            }}/>
+
                                             <label className="floating-label">Card Number</label>
                                             </div>
 
                                             <div className="form-in in">
-                                            <input id="card_name" type="text" placeholder="Name On The Card " />
+                                            <input id="card_name" type="text" placeholder="Name On The Card " 
+                                            value={cardName}
+                                            onChange={(e) => {
+                                                setCardName(e.target.value);
+                                                validateForm();
+                                            }} />
                                             <label className="floating-label">Name On The Card</label>
                                             </div>
 
@@ -94,17 +184,32 @@ export default function MycheckOut() {
                                             <div className="card-potion">
                                             <div className="card-date">
                                                 <div className="form-in">
-                                                <input id="card_expiry_mm" type="text" placeholder="MM" maxLength="2" style={{ textAlign: 'center' }} />
+                                                <input id="card_expiry_mm" type="text" placeholder="MM" maxLength="2" style={{ textAlign: 'center' }} 
+                                                value={expiryMM}
+                                                onChange={(e) => {
+                                                    setExpiryMM(e.target.value);
+                                                    validateForm();
+                                                }}/>
                                                 </div>
 
                                                 <div className="form-in">
-                                                <input id="card_expiry_yy" type="text" placeholder="YY" maxLength="2" style={{ textAlign: 'center' }} />
+                                                <input id="card_expiry_yy" type="text" placeholder="YY" maxLength="2" style={{ textAlign: 'center' }} 
+                                                 value={expiryYY}
+                                                 onChange={(e) => {
+                                                    setExpiryYY(e.target.value);
+                                                     validateForm();
+                                                 }}/>
                                                 </div>
                                             </div>
 
                                             <div className="cvvcard">
                                                 <div className="form-in in">
-                                                <input id="card_cvv" type="password" placeholder="CVV " maxLength="3" />
+                                                <input id="card_cvv" type="password" placeholder="CVV " maxLength="3" 
+                                                value={cvv}
+                                                onChange={(e) => {
+                                                    setCVV(e.target.value);
+                                                    validateForm();
+                                                }}/>
                                                 <label className="floating-label">CVV</label>
                                                 </div>
 
@@ -143,13 +248,13 @@ export default function MycheckOut() {
                                         >
                                             <path d="M26,2C12.7,2,2,12.7,2,26s10.7,24,24,24s24-10.7,24-24S39.3,2,26,2z M39.4,20L24.1,35.5 c-0.6,0.6-1.6,0.6-2.2,0L13.5,27c-0.6-0.6-0.6-1.6,0-2.2l2.2-2.2c0.6-0.6,1.6-0.6,2.2,0l4.4,4.5c0.4,0.4,1.1,0.4,1.5,0L35,15.5 c0.6-0.6,1.6-0.6,2.2,0l2.2,2.2C40.1,18.3,40.1,19.3,39.4,20z"></path>
                                         </svg>
-                                        <span>Deliver To:</span>
-                                        <span>Zeeshan</span>
+                                        {/* <span>Deliver To:</span> */}
+                                        <span>Unwrap happiness with every visit.</span>
                                         </div>
                                     </div>
                                     <div className="fulladdress">
-                                        <p>house no 45, malikana, bhadohi Sant Ravidas Nagar, 221401</p>
-                                        <p>Contact Number: <span>9121804096</span></p>
+                                        <p>Enjoy shopping with us and take advantage of our</p>
+                                        <p>exclusive offers....</p>
                                     </div>
                                 </div>
 
@@ -185,7 +290,15 @@ export default function MycheckOut() {
                                     </div>
                                     {/* <p>You Saved ₹200 on this order</p> */}
 
-                                    <a onClick={change} className="checkout-btn">checkout securely</a>
+                                    <a 
+                                    // onClick={() => addToOrder(singleCart.items[0].product._id)}
+                                    onClick={() => {
+                                        if (isFormValid) {
+                                            addToOrder(singleCart.items[0].product._id);
+                                        }
+                                    }}  
+                                    className={`checkout-btn ${isFormValid ? '' : 'disabled'}`} 
+                                    disabled={!isFormValid} >checkout securely</a>
                                     <CartPop
                                         showModal={showModal}
                                         setShowModal={setShowModal}

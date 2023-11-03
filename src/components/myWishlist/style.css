@@ -36,7 +36,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .my-account .my-account-profile p.username {

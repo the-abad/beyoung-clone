@@ -30,6 +30,7 @@ export default function MyWishlist() {
 
             axios.get(apiUrl, { headers: headers })
                 .then((response) => {
+                    console.log("Response data:", response.data);
                     setSingleWishlist(response?.data?.data);
                 })
                 .catch((error) => {
@@ -96,7 +97,7 @@ export default function MyWishlist() {
                         <div class="my-account profile">
                             <div class="myaccont-navigation">
                                 <div class="my-account-profile">
-                                    <p class="short-name">ZS</p>
+                                    <p class="short-name">Hii</p>
                                     <p class="username">{profile.name}</p>
                                     <span class="Beyoungster">#Beyoungster</span>
                                 </div>

@@ -117,7 +117,7 @@ export default function LogIn(props) {
                                 </div>
 
                                 <div className="login-forget-password-button">
-                                    <button onClick={submitForm} style={{ width: '100%' }}>LogIn</button>
+                                    <button onClick={submitForm} style={{ width: '100%', cursor:'pointer' }}>LogIn</button>
                                 </div>
                             </form>
 

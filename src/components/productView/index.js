@@ -20,7 +20,7 @@ export default function ProductView() {
     const [addToCartSuccess, setAddToCartSuccess] = useState(false);
 
     // Function to show the success message
-    const showAddToCartSuccessMessage = () => {
+    const showAddToCartSuccessMessage = () => { 
         setAddToCartSuccess(true);
         setTimeout(() => {
         setAddToCartSuccess(false);
@@ -128,7 +128,18 @@ export default function ProductView() {
         
     }
 
-    const addToCart = async (productId) => {
+    const [quantities, setQuantities] = useState('');
+    const getQuantity = (KO) => {
+        const quant= KO.target.value;
+        // console.log(quant);
+        setQuantities(quant)
+       
+
+    }
+
+    console.log(quantities);
+
+    const addToCart = async (productId, quantities) => {
 
         const token = localStorage.getItem('token');
         if (!token) {
@@ -143,9 +154,11 @@ export default function ProductView() {
             'Authorization': `Bearer ${token}`,
             'projectID': 's412etnzxy4q', 
         };
-
+        // if(!quantities){
+        //     quantities==3;
+        // }
         const body = {
-            "quantity": "1",
+            "quantity": 1,
 
         };
 
@@ -160,35 +173,15 @@ export default function ProductView() {
     }
 
     const addToBuyNow = async (productId) => {
-
         const token = localStorage.getItem('token');
+
         if (!token) {
             // User is not logged in, show a pop-up message
             setShowModal(true);
             return;
         }
-        
-        const apiUrl = 'https://academics.newtonschool.co/api/v1/ecommerce/cart/'+productId;
-       
-        const headers = {
-            'Content-Type': 'application/json',
-            'Authorization': `Bearer ${token}`,
-            'projectID': 's412etnzxy4q', 
-        };
 
-        const body = {
-            "quantity": "1",
-
-        };
-
-        try {
-            const response = await axios.patch(apiUrl, body, { headers: headers });
-            console.log(response);
-        } catch (error) {
-            console.error("Error fetching data: ", error);
-        }
-
-        window.location.href = '/Cart/BuyCart';
+        window.location.href = '/Cart/CheckOutBuy/'+productId;
 
 
     }
@@ -353,7 +346,7 @@ console.log(singleProduct);
                                             <strong>QTY:</strong>
                                             <div className="quantity-box">
                                                 
-                                                <select>
+                                                <select onChange={getQuantity}> 
                                                     <option selected="" value="1">1</option>
                                                     <option value="2">2</option>
                                                     <option value="3">3</option>

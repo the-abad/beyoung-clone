@@ -43,7 +43,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    text-transform: uppercase;
+    /* text-transform: uppercase; */
 }
 
 .my-account .my-account-profile p.username {
@@ -138,12 +138,12 @@ ul {
 }
 
 .my-profile.my-address-form.profile-from input {
-    border-bottom: 1px solid #e6e6e6;
+    border-bottom: 1px solid rgb(159, 157, 157);
     border-left: none;
     border-right: none;
     border-top: none;
     padding: 8px 0px;
-    background-color: grey;
+    background-color: #d5d5d5;
     color: #000;
 }
 
@@ -184,13 +184,13 @@ ul {
     margin-right: 20px;
 }
 
-.my-profile.my-address-form.profile-from input {
+/* .my-profile.my-address-form.profile-from input {
     border-bottom: 1px solid #e6e6e6;
     border-left: none;
     border-right: none;
     border-top: none;
     padding: 8px 0px;
-}
+} */
 
 .gender-tab-box span {
     display: inline-block;

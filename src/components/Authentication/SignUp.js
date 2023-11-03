@@ -132,7 +132,7 @@ console.log(props)
                                 </div>
 
                                 <div className="login-forget-password-button">
-                                    <button onClick={submitForm} style={{ width: '100%' }}>SignUp</button>
+                                    <button onClick={submitForm} style={{ width: '100%', cursor:'pointer' }}>SignUp</button>
                                 </div>
                             </form>
 
