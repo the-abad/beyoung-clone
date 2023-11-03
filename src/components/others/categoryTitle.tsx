@@ -10,7 +10,7 @@ type CategoryTitleProps = {
 const CategoryTitle: React.FC<CategoryTitleProps> = (props) => {
   return (
     <>
-      <a name={props.title}></a>
+      <a id={props.title}></a>
       <div className="headingbb wrapper">
         <span className="headingname">{props.title}</span>
       </div>
