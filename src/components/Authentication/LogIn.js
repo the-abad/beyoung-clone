@@ -112,7 +112,7 @@ export default function LogIn(props) {
                             <form method="POST">
                                 <div className="form-in">
                                     <input type="email" onChange={onChange} name='email' placeholder='Enter your email *' className="" autoComplete="off"   />   
-                                    <input type="text" onChange={onChange} name='password' placeholder='Enter your password *' className="" autoComplete="off" minLength="8"  style={{'margin-top':'10px'}}/>                           
+                                    <input type="password" onChange={onChange} name='password' placeholder='Enter your password *' className="" autoComplete="off" minLength="8"  style={{'margin-top':'10px'}}/>                           
 
                                 </div>
 

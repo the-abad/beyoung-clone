@@ -124,7 +124,7 @@ console.log(props)
 
                                     <input type="email" onChange={onChange} name="email" placeholder='Enter your email *' className="" autoComplete="off"  style={{'margin-top':'10px'}} />
                                     
-                                    <input type="text" onChange={onChange} name='password' placeholder='Enter your password *' className="" autoComplete="off" minLength="8"  style={{'margin-top':'10px'}}/>
+                                    <input type="password" onChange={onChange} name='password' placeholder='Enter your password *' className="" autoComplete="off" minLength="8"  style={{'margin-top':'10px'}}/>
                                     <input type="hidden" name="appType" value="ecommerce" />
                                     
 

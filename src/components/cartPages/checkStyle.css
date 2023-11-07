@@ -63,6 +63,7 @@ section.container.checkout-container-maincart {
 
 .tab-contents.current {
     display: block;
+    min-width: 220px;
 }
 
 .right-tab.cardpaymentmaintab div#tab-1 .heading {
